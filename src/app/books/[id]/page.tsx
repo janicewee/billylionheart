@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
-import { ExternalLink, BookOpen, Users, MessageSquare, Star } from "lucide-react";
+import { ExternalLink, BookOpen, Users, MessageSquare, Star, Video } from "lucide-react";
 import ReviewSection from "@/components/ReviewSection";
 
 async function getBook(id: string) {
@@ -129,6 +129,36 @@ export default async function BookPage({ params }: { params: { id: string } }) {
             </Card>
           </div>
         </div>
+
+        {/* YouTube Videos Section */}
+        {book.youtubeVideos && Array.isArray(book.youtubeVideos) && book.youtubeVideos.length > 0 && (
+          <Card className="mb-12">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Video className="h-5 w-5" />
+                Related Videos
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-6">
+                {book.youtubeVideos.map((video: { videoId: string; title: string }, index: number) => (
+                  <div key={index} className="space-y-2">
+                    <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${video.videoId}`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                      />
+                    </div>
+                    <p className="text-sm font-medium text-center">{video.title}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Characters Section */}
         {characters.length > 0 && (
