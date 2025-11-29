@@ -9,8 +9,9 @@ import { ExternalLink, BookOpen, Users, MessageSquare, Star, Video } from "lucid
 import ReviewSection from "@/components/ReviewSection";
 
 async function getBook(id: string) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window === 'undefined' ? 'http://localhost:3000' : '');
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/books?id=${id}`,
+    `${baseUrl}/api/books?id=${id}`,
     { cache: 'no-store' }
   );
   
@@ -22,8 +23,9 @@ async function getBook(id: string) {
 }
 
 async function getBookCharacters(bookNumber: number) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window === 'undefined' ? 'http://localhost:3000' : '');
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/characters?book=${bookNumber}`,
+    `${baseUrl}/api/characters?book=${bookNumber}`,
     { cache: 'no-store' }
   );
   
