@@ -12,6 +12,7 @@ export const books = sqliteTable('books', {
   buyLink: text('buy_link'),
   barnesNobleLink: text('barnes_noble_link'),
   authorWebsiteLink: text('author_website_link'),
+  youtubeVideos: text('youtube_videos', { mode: 'json' }),
   createdAt: text('created_at').notNull(),
 });
 
