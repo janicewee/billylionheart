@@ -196,11 +196,19 @@ export default async function BookPage({ params }: { params: { id: string } }) {
               <CardTitle>YouTube Videos</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
+              <div className="grid gap-6 md:grid-cols-2">
                 {videos.map((video, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <ExternalLink className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">{video.title}</span>
+                  <div key={index} className="space-y-2">
+                    <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-muted">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${video.id}`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                      />
+                    </div>
+                    <p className="text-sm font-medium">{video.title}</p>
                   </div>
                 ))}
               </div>
