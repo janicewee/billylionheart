@@ -33,6 +33,7 @@ export default function CharactersPage() {
   const [speciesFilter, setSpeciesFilter] = useState<string>("all");
   const [typeFilter, setTypeFilter] = useState<string>("all");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchCharacters();
@@ -44,12 +45,24 @@ export default function CharactersPage() {
 
   const fetchCharacters = async () => {
     try {
+      setError(null);
       const response = await fetch("/api/characters?limit=100");
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch: ${response.status}`);
+      }
+      
       const data = await response.json();
+      
+      if (!Array.isArray(data)) {
+        throw new Error("Invalid data format received");
+      }
+      
       setCharacters(data);
       setFilteredCharacters(data);
-    } catch (error) {
-      console.error("Failed to fetch characters:", error);
+    } catch (err) {
+      console.error("Failed to fetch characters:", err);
+      setError(err instanceof Error ? err.message : "Failed to load characters");
     } finally {
       setLoading(false);
     }
@@ -62,8 +75,8 @@ export default function CharactersPage() {
     if (search) {
       filtered = filtered.filter(
         (char) =>
-          char.name.toLowerCase().includes(search.toLowerCase()) ||
-          char.description.toLowerCase().includes(search.toLowerCase())
+          char.name?.toLowerCase().includes(search.toLowerCase()) ||
+          char.description?.toLowerCase().includes(search.toLowerCase())
       );
     }
 
@@ -71,7 +84,7 @@ export default function CharactersPage() {
     if (bookFilter !== "all") {
       const bookNum = parseInt(bookFilter);
       filtered = filtered.filter((char) =>
-        char.appearsInBooks.includes(bookNum)
+        Array.isArray(char.appearsInBooks) && char.appearsInBooks.includes(bookNum)
       );
     }
 
@@ -88,8 +101,28 @@ export default function CharactersPage() {
     setFilteredCharacters(filtered);
   };
 
-  const uniqueSpecies = Array.from(new Set(characters.map((c) => c.species)));
-  const uniqueTypes = Array.from(new Set(characters.map((c) => c.type)));
+  const uniqueSpecies = Array.from(
+    new Set(characters.map((c) => c.species).filter(Boolean))
+  );
+  const uniqueTypes = Array.from(
+    new Set(characters.map((c) => c.type).filter(Boolean))
+  );
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="container py-12">
+          <Card>
+            <CardContent className="p-12 text-center">
+              <p className="text-destructive mb-4">Error: {error}</p>
+              <Button onClick={fetchCharacters}>Try Again</Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -231,7 +264,7 @@ export default function CharactersPage() {
                   <div>
                     <p className="text-xs text-muted-foreground mb-1">Appears in:</p>
                     <div className="flex gap-1">
-                      {character.appearsInBooks.map((bookNum) => (
+                      {Array.isArray(character.appearsInBooks) && character.appearsInBooks.map((bookNum) => (
                         <Badge key={bookNum} variant="default" className="text-xs">
                           Book {bookNum}
                         </Badge>
