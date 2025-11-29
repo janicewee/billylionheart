@@ -9,7 +9,8 @@ export default async function HomePage() {
   let books = [];
   
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/books`, {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window === 'undefined' ? 'http://localhost:3000' : '');
+    const response = await fetch(`${baseUrl}/api/books`, {
       cache: 'no-store'
     });
     
