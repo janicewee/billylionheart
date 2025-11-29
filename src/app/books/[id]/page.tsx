@@ -43,28 +43,6 @@ export default async function BookPage({ params }: { params: { id: string } }) {
 
   const characters = await getBookCharacters(book.bookNumber);
 
-  // YouTube video links based on book number
-  const youtubeVideos: Record<number, { title: string; id: string }[]> = {
-    1: [
-      { title: "Leonard, the Lion Nanny talks about Billy Lionheart", id: "example1" },
-      { title: "Lion-napped", id: "example2" },
-      { title: "Billy and Leonard save Billy's bros", id: "example3" },
-      { title: "Billy's escape", id: "example4" },
-    ],
-    2: [
-      { title: "Billy & Bluma. Double Trouble. Chapter 1. How it all begins.", id: "example5" },
-      { title: "Junta's Trap", id: "example6" },
-      { title: "The origin of Billy's super strength", id: "example7" },
-    ],
-    3: [
-      { title: "Super Powers gone out of control", id: "example8" },
-      { title: "Who poisoned Leonard Lion?", id: "example9" },
-      { title: "Billy & Bluma in St Lydia's Academy", id: "example10" },
-    ],
-  };
-
-  const videos = youtubeVideos[book.bookNumber as keyof typeof youtubeVideos] || [];
-
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -184,33 +162,6 @@ export default async function BookPage({ params }: { params: { id: string } }) {
                     View All Characters
                   </Button>
                 </Link>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* YouTube Videos Section */}
-        {videos.length > 0 && (
-          <Card className="mb-12">
-            <CardHeader>
-              <CardTitle>YouTube Videos</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-6 md:grid-cols-2">
-                {videos.map((video, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-muted">
-                      <iframe
-                        src={`https://www.youtube.com/embed/${video.id}`}
-                        title={video.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        className="absolute inset-0 w-full h-full"
-                      />
-                    </div>
-                    <p className="text-sm font-medium">{video.title}</p>
-                  </div>
-                ))}
               </div>
             </CardContent>
           </Card>
