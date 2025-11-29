@@ -6,10 +6,19 @@ import Navigation from "@/components/Navigation";
 import { BookOpen, ExternalLink } from "lucide-react";
 
 export default async function HomePage() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/books`, {
-    cache: 'no-store'
-  });
-  const books = await response.json();
+  let books = [];
+  
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/books`, {
+      cache: 'no-store'
+    });
+    
+    if (response.ok) {
+      books = await response.json();
+    }
+  } catch (error) {
+    console.error('Failed to fetch books:', error);
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
@@ -61,35 +70,39 @@ export default async function HomePage() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           The Book Series
         </h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {books.map((book: any) => (
-            <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="relative aspect-[3/4] w-full">
-                <Image
-                  src={book.coverImageUrl}
-                  alt={book.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6 space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Book {book.bookNumber}</p>
-                  <h3 className="text-xl font-bold">{book.title}</h3>
+        {books.length > 0 ? (
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {books.map((book: any) => (
+              <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative aspect-[3/4] w-full">
+                  <Image
+                    src={book.coverImageUrl}
+                    alt={book.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <p className="text-sm text-muted-foreground line-clamp-3">
-                  {book.summary}
-                </p>
-                <Link href={`/books/${book.id}`}>
-                  <Button className="w-full">
-                    <BookOpen className="mr-2 h-4 w-4" />
-                    Read More
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                <CardContent className="p-6 space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">Book {book.bookNumber}</p>
+                    <h3 className="text-xl font-bold">{book.title}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground line-clamp-3">
+                    {book.summary}
+                  </p>
+                  <Link href={`/books/${book.id}`}>
+                    <Button className="w-full">
+                      <BookOpen className="mr-2 h-4 w-4" />
+                      Read More
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-muted-foreground">Loading books...</p>
+        )}
       </section>
 
       {/* What Happens Next Section */}
