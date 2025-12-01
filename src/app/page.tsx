@@ -80,7 +80,9 @@ export default async function HomePage() {
                     src={book.coverImageUrl}
                     alt={book.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                     className="object-cover"
+                    priority={book.bookNumber <= 1}
                   />
                 </div>
                 <CardContent className="p-6 space-y-4">
