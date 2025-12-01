@@ -3,6 +3,7 @@ import "./globals.css";
 import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "The Adventures of Billy Lionheart - Fantasy Book Series by Janice Wee",
@@ -40,6 +41,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         {children}
+        <Toaster />
         <VisualEditsMessenger />
       </body>
     </html>
