@@ -8,7 +8,6 @@ import { useSession } from "@/lib/auth-client";
 import { Star, MessageSquare, Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
 
 interface Review {
   id: number;
@@ -147,149 +146,146 @@ export default function ReviewSection({ bookId, bookTitle }: { bookId: number; b
   };
 
   return (
-    <>
-      <Toaster />
-      <div className="space-y-8">
-        {/* Write Review */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Star className="h-5 w-5" />
-              Write a Review
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {session?.user ? (
-              <>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-2">Your Rating</p>
-                  <div className="flex gap-2">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <button
-                        key={star}
-                        onClick={() => setRating(star)}
-                        onMouseEnter={() => setHoverRating(star)}
-                        onMouseLeave={() => setHoverRating(0)}
-                        className="transition-transform hover:scale-110"
-                      >
-                        <Star
-                          className={`h-8 w-8 ${
-                            star <= (hoverRating || rating)
-                              ? "fill-yellow-400 text-yellow-400"
-                              : "text-gray-300"
-                          }`}
-                        />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <Textarea
-                    placeholder="Share your thoughts about this book..."
-                    value={reviewText}
-                    onChange={(e) => setReviewText(e.target.value)}
-                    rows={4}
-                  />
-                </div>
-                <Button onClick={handleSubmitReview} disabled={loading}>
-                  Submit Review
-                </Button>
-              </>
-            ) : (
-              <div className="text-center py-4">
-                <p className="text-muted-foreground mb-4">
-                  Please log in to write a review
-                </p>
-                <Button onClick={() => router.push("/login")}>Login</Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Reviews List */}
-        {reviews.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>Reviews ({reviews.length})</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {reviews.map((review) => (
-                <div key={review.id} className="border-b last:border-0 pb-4 last:pb-0">
-                  <div className="flex items-center gap-2 mb-2">
-                    {[1, 2, 3, 4, 5].map((star) => (
+    <div className="space-y-8">
+      {/* Write Review */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Star className="h-5 w-5" />
+            Write a Review
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {session?.user ? (
+            <>
+              <div>
+                <p className="text-sm text-muted-foreground mb-2">Your Rating</p>
+                <div className="flex gap-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      onClick={() => setRating(star)}
+                      onMouseEnter={() => setHoverRating(star)}
+                      onMouseLeave={() => setHoverRating(0)}
+                      className="transition-transform hover:scale-110"
+                    >
                       <Star
-                        key={star}
-                        className={`h-4 w-4 ${
-                          star <= review.rating
+                        className={`h-8 w-8 ${
+                          star <= (hoverRating || rating)
                             ? "fill-yellow-400 text-yellow-400"
                             : "text-gray-300"
                         }`}
                       />
-                    ))}
-                    <span className="text-sm text-muted-foreground">
-                      {new Date(review.createdAt).toLocaleDateString()}
-                    </span>
-                  </div>
-                  {review.reviewText && (
-                    <p className="text-sm">{review.reviewText}</p>
-                  )}
+                    </button>
+                  ))}
                 </div>
-              ))}
-            </CardContent>
-          </Card>
-        )}
+              </div>
+              <div>
+                <Textarea
+                  placeholder="Share your thoughts about this book..."
+                  value={reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
+                  rows={4}
+                />
+              </div>
+              <Button onClick={handleSubmitReview} disabled={loading}>
+                Submit Review
+              </Button>
+            </>
+          ) : (
+            <div className="text-center py-4">
+              <p className="text-muted-foreground mb-4">
+                Please log in to write a review
+              </p>
+              <Button onClick={() => router.push("/login")}>Login</Button>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
-        {/* Discussions */}
+      {/* Reviews List */}
+      {reviews.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <MessageSquare className="h-5 w-5" />
-              Discussions
-            </CardTitle>
+            <CardTitle>Reviews ({reviews.length})</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {session?.user ? (
-              <div className="space-y-2">
-                <Textarea
-                  placeholder="Start a discussion..."
-                  value={discussionText}
-                  onChange={(e) => setDiscussionText(e.target.value)}
-                  rows={3}
-                />
-                <Button onClick={handleSubmitDiscussion} disabled={loading} className="gap-2">
-                  <Send className="h-4 w-4" />
-                  Post Discussion
-                </Button>
+            {reviews.map((review) => (
+              <div key={review.id} className="border-b last:border-0 pb-4 last:pb-0">
+                <div className="flex items-center gap-2 mb-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      className={`h-4 w-4 ${
+                        star <= review.rating
+                          ? "fill-yellow-400 text-yellow-400"
+                          : "text-gray-300"
+                      }`}
+                    />
+                  ))}
+                  <span className="text-sm text-muted-foreground">
+                    {new Date(review.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+                {review.reviewText && (
+                  <p className="text-sm">{review.reviewText}</p>
+                )}
               </div>
-            ) : (
-              <div className="text-center py-4">
-                <p className="text-muted-foreground mb-4">
-                  Please log in to join the discussion
-                </p>
-                <Button onClick={() => router.push("/login")}>Login</Button>
-              </div>
-            )}
-
-            {discussions.length > 0 ? (
-              <div className="space-y-4 mt-6">
-                <h3 className="font-semibold">Recent Discussions</h3>
-                {discussions.map((discussion) => (
-                  <div key={discussion.id} className="border-l-2 border-primary pl-4">
-                    <p className="text-sm mb-2">{discussion.content}</p>
-                    <span className="text-xs text-muted-foreground">
-                      {new Date(discussion.createdAt).toLocaleDateString()}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground text-center py-4">
-                No discussions yet. Be the first to start one!
-              </p>
-            )}
+            ))}
           </CardContent>
         </Card>
-      </div>
-    </>
+      )}
+
+      {/* Discussions */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <MessageSquare className="h-5 w-5" />
+            Discussions
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {session?.user ? (
+            <div className="space-y-2">
+              <Textarea
+                placeholder="Start a discussion..."
+                value={discussionText}
+                onChange={(e) => setDiscussionText(e.target.value)}
+                rows={3}
+              />
+              <Button onClick={handleSubmitDiscussion} disabled={loading} className="gap-2">
+                <Send className="h-4 w-4" />
+                Post Discussion
+              </Button>
+            </div>
+          ) : (
+            <div className="text-center py-4">
+              <p className="text-muted-foreground mb-4">
+                Please log in to join the discussion
+              </p>
+              <Button onClick={() => router.push("/login")}>Login</Button>
+            </div>
+          )}
+
+          {discussions.length > 0 ? (
+            <div className="space-y-4 mt-6">
+              <h3 className="font-semibold">Recent Discussions</h3>
+              {discussions.map((discussion) => (
+                <div key={discussion.id} className="border-l-2 border-primary pl-4">
+                  <p className="text-sm mb-2">{discussion.content}</p>
+                  <span className="text-xs text-muted-foreground">
+                    {new Date(discussion.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground text-center py-4">
+              No discussions yet. Be the first to start one!
+            </p>
+          )}
+        </CardContent>
+      </Card>
+    </div>
   );
 }
