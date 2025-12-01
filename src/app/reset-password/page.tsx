@@ -12,6 +12,9 @@ import { BookOpen } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 
+// Force dynamic rendering to prevent prerender errors with useSearchParams
+export const dynamic = 'force-dynamic';
+
 function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
