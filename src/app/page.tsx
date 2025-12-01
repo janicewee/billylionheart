@@ -72,17 +72,19 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {booksList.map((book) => (
               <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="relative aspect-[3/4] w-full bg-muted">
-                  <Image
-                    src={book.coverImageUrl}
-                    alt={book.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
-                    className="object-cover"
-                    priority={book.bookNumber <= 1}
-                    unoptimized
-                  />
-                </div>
+                <Link href={`/books/${book.id}`} className="block">
+                  <div className="relative aspect-[3/4] w-full bg-muted cursor-pointer hover:opacity-90 transition-opacity">
+                    <Image
+                      src={book.coverImageUrl}
+                      alt={book.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                      className="object-cover"
+                      priority={book.bookNumber <= 1}
+                      unoptimized
+                    />
+                  </div>
+                </Link>
                 <CardContent className="p-6 space-y-4">
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Book {book.bookNumber}</p>
