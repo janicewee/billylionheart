@@ -28,6 +28,12 @@ export default function RootLayout({
           data-debug="true"
           data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
         />
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="d7ac502f-a5d9-4a7f-a06d-e5326aab6b31"
+          strategy="afterInteractive"
+        />
         {children}
         <VisualEditsMessenger />
       </body>
