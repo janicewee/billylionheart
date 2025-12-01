@@ -32,7 +32,7 @@ async function BooksGrid() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                 className="object-cover"
                 priority={book.bookNumber <= 1}
-                loading={book.bookNumber <= 1 ? "eager" : "lazy"}
+                unoptimized
               />
             </div>
             <CardContent className="p-6 space-y-4">
@@ -59,7 +59,7 @@ async function BooksGrid() {
     return (
       <div className="text-center space-y-4">
         <p className="text-muted-foreground">Unable to load books at this time.</p>
-        <Button onClick={() => window.location.reload()}>Retry</Button>
+        <p className="text-xs text-muted-foreground">{String(error)}</p>
       </div>
     );
   }
