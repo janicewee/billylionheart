@@ -26,8 +26,15 @@ async function getBook(id: string) {
 
 async function getBookCharacters(bookNumber: number) {
   try {
-    const result = await db.select().from(characters).where(eq(characters.bookNumber, bookNumber));
-    return result;
+    // Get all characters and filter by appearsInBooks JSON array
+    const allCharacters = await db.select().from(characters);
+    return allCharacters.filter(character => {
+      if (!character.appearsInBooks) return false;
+      const booksArray = Array.isArray(character.appearsInBooks) 
+        ? character.appearsInBooks 
+        : [];
+      return booksArray.includes(bookNumber);
+    });
   } catch (error) {
     console.error("Error fetching characters:", error);
     return [];
