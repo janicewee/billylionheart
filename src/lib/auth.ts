@@ -10,7 +10,28 @@ export const auth = betterAuth({
 		provider: "sqlite",
 	}),
 	emailAndPassword: {    
-		enabled: true
+		enabled: true,
+		sendResetPassword: async ({ user, url }) => {
+			// For development: Log the reset URL to console
+			console.log("=".repeat(80));
+			console.log("PASSWORD RESET REQUEST");
+			console.log("=".repeat(80));
+			console.log(`User: ${user.email}`);
+			console.log(`Reset URL: ${url}`);
+			console.log("=".repeat(80));
+			
+			// TODO: Integrate with email service (SendGrid, Resend, etc.)
+			// Example with Resend:
+			// await resend.emails.send({
+			//   from: 'noreply@yourdomain.com',
+			//   to: user.email,
+			//   subject: 'Reset Your Password',
+			//   html: `<p>Click <a href="${url}">here</a> to reset your password.</p>`
+			// });
+			
+			// For now, return success since we're logging to console
+			return;
+		}
 	},
 	plugins: [bearer()]
 });
