@@ -54,14 +54,20 @@ export default function RegisterPage() {
         password
       });
 
-      if (error?.code) {
-        toast.error(getErrorMessage(error.code));
+      if (error) {
+        // Check for specific error codes or messages
+        if (error.code === "USER_ALREADY_EXISTS" || error.message?.includes("already exists") || error.message?.includes("existing email")) {
+          toast.error("This email is already registered. Please login instead or use a different email.");
+        } else {
+          toast.error(error.message || getErrorMessage(error.code || ""));
+        }
         return;
       }
 
       toast.success("Registration successful! Please log in.");
       router.push("/login?registered=true");
     } catch (error) {
+      console.error("Registration error:", error);
       toast.error("An error occurred during registration");
     } finally {
       setLoading(false);
