@@ -7,6 +7,11 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: "The Adventures of Billy Lionheart - Fantasy Book Series by Janice Wee",
   description: "Join Billy Lionheart and his lion guardian Leonard on epic fantasy adventures! A heartwarming book series featuring courage, friendship, and magical creatures. Read reviews, join discussions, and connect with fellow fans.",
+  icons: {
+    icon: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/favicon-1764594353195.ico",
+    shortcut: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/favicon-1764594353195.ico",
+    apple: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/favicon-1764594353195.ico",
+  },
 };
 
 export default function RootLayout({
