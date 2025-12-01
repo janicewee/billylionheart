@@ -5,18 +5,20 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { authClient, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { BookOpen, Users, Library, Trophy, LogOut, User, Book } from "lucide-react";
+import { BookOpen, Users, Library, Trophy, LogOut, User, Book, Menu, X } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useState } from "react";
 
 export default function Navigation() {
   const pathname = usePathname();
   const { data: session, refetch } = useSession();
   const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
     const token = localStorage.getItem("bearer_token");
@@ -95,16 +97,77 @@ export default function Navigation() {
                 variant="ghost"
                 size="sm"
                 onClick={() => router.push("/login")}
+                className="hidden sm:inline-flex"
               >
                 Login
               </Button>
-              <Button size="sm" onClick={() => router.push("/register")}>
+              <Button size="sm" onClick={() => router.push("/register")} className="hidden sm:inline-flex">
                 Register
               </Button>
             </>
           )}
+          
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t bg-background">
+          <div className="container py-4 space-y-3">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 px-4 py-2 rounded-md transition-colors ${
+                    pathname === link.href
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-muted"
+                  }`}
+                >
+                  <Icon className="h-5 w-5" />
+                  <span className="font-medium">{link.label}</span>
+                </Link>
+              );
+            })}
+            
+            {!session?.user && (
+              <div className="flex flex-col gap-2 pt-3 border-t">
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    router.push("/login");
+                  }}
+                >
+                  Login
+                </Button>
+                <Button
+                  className="w-full"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    router.push("/register");
+                  }}
+                >
+                  Register
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
