@@ -4,19 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import { BookOpen, ExternalLink } from "lucide-react";
+import { db } from "@/db";
+import { books } from "@/db/schema";
+import { asc } from "drizzle-orm";
 
 export default async function HomePage() {
-  let books = [];
+  // Fetch books directly from database instead of API route
+  let booksList = [];
   
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window === 'undefined' ? 'http://localhost:3000' : '');
-    const response = await fetch(`${baseUrl}/api/books`, {
-      cache: 'no-store'
-    });
-    
-    if (response.ok) {
-      books = await response.json();
-    }
+    booksList = await db.select().from(books).orderBy(asc(books.bookNumber));
   } catch (error) {
     console.error('Failed to fetch books:', error);
   }
@@ -71,9 +68,9 @@ export default async function HomePage() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           The Book Series
         </h2>
-        {books.length > 0 ? (
+        {booksList.length > 0 ? (
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {books.map((book: any) => (
+            {booksList.map((book) => (
               <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="relative aspect-[3/4] w-full">
                   <Image
@@ -104,7 +101,7 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <p className="text-center text-muted-foreground">Loading books...</p>
+          <p className="text-center text-muted-foreground">No books available at the moment.</p>
         )}
       </section>
 
