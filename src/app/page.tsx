@@ -10,53 +10,64 @@ import { books } from "@/db/schema";
 import { asc } from "drizzle-orm";
 
 async function BooksGrid() {
-  // Fetch books directly from database
-  const booksList = await db.select().from(books).orderBy(asc(books.bookNumber));
+  try {
+    // Fetch books directly from database
+    const booksList = await db.select().from(books).orderBy(asc(books.bookNumber));
 
-  if (booksList.length === 0) {
+    if (!booksList || booksList.length === 0) {
+      return (
+        <p className="text-center text-muted-foreground">No books available at the moment.</p>
+      );
+    }
+
     return (
-      <p className="text-center text-muted-foreground">No books available at the moment.</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {booksList.map((book) => (
+          <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+            <div className="relative aspect-[3/4] w-full bg-muted">
+              <Image
+                src={book.coverImageUrl}
+                alt={book.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                className="object-cover"
+                priority={book.bookNumber <= 1}
+                loading={book.bookNumber <= 1 ? "eager" : "lazy"}
+              />
+            </div>
+            <CardContent className="p-6 space-y-4">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Book {book.bookNumber}</p>
+                <h3 className="text-xl font-bold">{book.title}</h3>
+              </div>
+              <p className="text-sm text-muted-foreground line-clamp-3">
+                {book.summary}
+              </p>
+              <Link href={`/books/${book.id}`}>
+                <Button className="w-full">
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  Read More
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    );
+  } catch (error) {
+    console.error("Error loading books:", error);
+    return (
+      <div className="text-center space-y-4">
+        <p className="text-muted-foreground">Unable to load books at this time.</p>
+        <Button onClick={() => window.location.reload()}>Retry</Button>
+      </div>
     );
   }
-
-  return (
-    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      {booksList.map((book) => (
-        <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-          <div className="relative aspect-[3/4] w-full">
-            <Image
-              src={book.coverImageUrl}
-              alt={book.title}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
-              className="object-cover"
-              priority={book.bookNumber <= 1}
-            />
-          </div>
-          <CardContent className="p-6 space-y-4">
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Book {book.bookNumber}</p>
-              <h3 className="text-xl font-bold">{book.title}</h3>
-            </div>
-            <p className="text-sm text-muted-foreground line-clamp-3">
-              {book.summary}
-            </p>
-            <Link href={`/books/${book.id}`}>
-              <Button className="w-full">
-                <BookOpen className="mr-2 h-4 w-4" />
-                Read More
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
 }
 
 function BooksLoadingFallback() {
   return (
-    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {[1, 2, 3].map((i) => (
         <Card key={i} className="overflow-hidden">
           <div className="relative aspect-[3/4] w-full bg-muted animate-pulse" />
