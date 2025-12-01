@@ -114,6 +114,10 @@ export default function LoginPage() {
               <Link href="/register" className="text-primary hover:underline">
                 Register here
               </Link>
+              {" "}or{" "}
+              <Link href="/forgot-password" className="text-primary hover:underline">
+                Forgot Password?
+              </Link>
             </div>
           </CardContent>
         </Card>
