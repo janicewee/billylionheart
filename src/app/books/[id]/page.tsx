@@ -7,33 +7,31 @@ import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
 import { ExternalLink, BookOpen, Users, MessageSquare, Star, Video } from "lucide-react";
 import ReviewSection from "@/components/ReviewSection";
+import { db } from "@/db";
+import { books, characters } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 async function getBook(id: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window === 'undefined' ? 'http://localhost:3000' : '');
-  const response = await fetch(
-    `${baseUrl}/api/books?id=${id}`,
-    { cache: 'no-store' }
-  );
-  
-  if (!response.ok) {
+  try {
+    const bookId = parseInt(id);
+    if (isNaN(bookId)) return null;
+    
+    const result = await db.select().from(books).where(eq(books.id, bookId)).limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("Error fetching book:", error);
     return null;
   }
-  
-  return response.json();
 }
 
 async function getBookCharacters(bookNumber: number) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window === 'undefined' ? 'http://localhost:3000' : '');
-  const response = await fetch(
-    `${baseUrl}/api/characters?book=${bookNumber}`,
-    { cache: 'no-store' }
-  );
-  
-  if (!response.ok) {
+  try {
+    const result = await db.select().from(characters).where(eq(characters.bookNumber, bookNumber));
+    return result;
+  } catch (error) {
+    console.error("Error fetching characters:", error);
     return [];
   }
-  
-  return response.json();
 }
 
 export default async function BookPage({ params }: { params: Promise<{ id: string }> }) {
@@ -44,7 +42,7 @@ export default async function BookPage({ params }: { params: Promise<{ id: strin
     notFound();
   }
 
-  const characters = await getBookCharacters(book.bookNumber);
+  const bookCharacters = await getBookCharacters(book.bookNumber);
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,6 +58,7 @@ export default async function BookPage({ params }: { params: Promise<{ id: strin
                 alt={book.title}
                 fill
                 className="object-cover"
+                unoptimized
               />
             </div>
             <div className="space-y-2">
@@ -164,7 +163,7 @@ export default async function BookPage({ params }: { params: Promise<{ id: strin
         )}
 
         {/* Characters Section */}
-        {characters.length > 0 && (
+        {bookCharacters.length > 0 && (
           <Card className="mb-12">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -174,7 +173,7 @@ export default async function BookPage({ params }: { params: Promise<{ id: strin
             </CardHeader>
             <CardContent>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {characters.map((character: any) => (
+                {bookCharacters.map((character) => (
                   <Link
                     key={character.id}
                     href={`/characters/${character.id}`}
