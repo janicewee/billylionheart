@@ -93,6 +93,7 @@ export const account = sqliteTable('account', {
   accessToken: text('access_token'),
   refreshToken: text('refresh_token'),
   expiresAt: text('expires_at'),
+  password: text('password'),
   createdAt: text('created_at').notNull(),
   updatedAt: text('updated_at').notNull(),
 });
