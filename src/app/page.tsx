@@ -4,86 +4,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import { BookOpen, ExternalLink } from "lucide-react";
-import { Suspense } from "react";
 import { db } from "@/db";
 import { books } from "@/db/schema";
 import { asc } from "drizzle-orm";
 
-async function BooksGrid() {
+export default async function HomePage() {
+  // Fetch books directly - no Suspense needed
+  let booksList;
   try {
-    // Fetch books directly from database
-    const booksList = await db.select().from(books).orderBy(asc(books.bookNumber));
-
-    if (!booksList || booksList.length === 0) {
-      return (
-        <p className="text-center text-muted-foreground">No books available at the moment.</p>
-      );
-    }
-
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {booksList.map((book) => (
-          <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-            <div className="relative aspect-[3/4] w-full bg-muted">
-              <Image
-                src={book.coverImageUrl}
-                alt={book.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
-                className="object-cover"
-                priority={book.bookNumber <= 1}
-                unoptimized
-              />
-            </div>
-            <CardContent className="p-6 space-y-4">
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Book {book.bookNumber}</p>
-                <h3 className="text-xl font-bold">{book.title}</h3>
-              </div>
-              <p className="text-sm text-muted-foreground line-clamp-3">
-                {book.summary}
-              </p>
-              <Link href={`/books/${book.id}`}>
-                <Button className="w-full">
-                  <BookOpen className="mr-2 h-4 w-4" />
-                  Read More
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    );
+    booksList = await db.select().from(books).orderBy(asc(books.bookNumber));
   } catch (error) {
     console.error("Error loading books:", error);
-    return (
-      <div className="text-center space-y-4">
-        <p className="text-muted-foreground">Unable to load books at this time.</p>
-        <p className="text-xs text-muted-foreground">{String(error)}</p>
-      </div>
-    );
+    booksList = [];
   }
-}
 
-function BooksLoadingFallback() {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      {[1, 2, 3].map((i) => (
-        <Card key={i} className="overflow-hidden">
-          <div className="relative aspect-[3/4] w-full bg-muted animate-pulse" />
-          <CardContent className="p-6 space-y-4">
-            <div className="h-4 bg-muted rounded animate-pulse" />
-            <div className="h-6 bg-muted rounded animate-pulse w-3/4" />
-            <div className="h-16 bg-muted rounded animate-pulse" />
-            <div className="h-10 bg-muted rounded animate-pulse" />
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
-}
-
-export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
       <Navigation />
@@ -134,9 +68,42 @@ export default function HomePage() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           The Book Series
         </h2>
-        <Suspense fallback={<BooksLoadingFallback />}>
-          <BooksGrid />
-        </Suspense>
+        {booksList && booksList.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {booksList.map((book) => (
+              <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative aspect-[3/4] w-full bg-muted">
+                  <Image
+                    src={book.coverImageUrl}
+                    alt={book.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                    className="object-cover"
+                    priority={book.bookNumber <= 1}
+                    unoptimized
+                  />
+                </div>
+                <CardContent className="p-6 space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-1">Book {book.bookNumber}</p>
+                    <h3 className="text-xl font-bold">{book.title}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground line-clamp-3">
+                    {book.summary}
+                  </p>
+                  <Link href={`/books/${book.id}`}>
+                    <Button className="w-full">
+                      <BookOpen className="mr-2 h-4 w-4" />
+                      Read More
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-muted-foreground">No books available at the moment.</p>
+        )}
       </section>
 
       {/* What Happens Next Section */}
