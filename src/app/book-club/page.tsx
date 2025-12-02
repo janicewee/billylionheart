@@ -4,16 +4,16 @@ import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, BookOpen, Users } from "lucide-react";
+import { Download, BookOpen, Users, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 
 export default function BookClubPage() {
-  const [isDownloading, setIsDownloading] = useState<number | null>(null);
+  const [isOpening, setIsOpening] = useState<number | null>(null);
 
-  const handleDownload = async (bookId: number, bookTitle: string) => {
-    setIsDownloading(bookId);
+  const handleOpenPDF = async (bookId: number, bookTitle: string) => {
+    setIsOpening(bookId);
     
     try {
       // Fetch the book club kit from the API
@@ -32,33 +32,26 @@ export default function BookClubPage() {
       
       const kit = kits[0];
       
-      // Fetch the PDF as a blob
-      const pdfResponse = await fetch(kit.pdfUrl);
+      // Open PDF in new tab
+      const isInIframe = window.self !== window.top;
       
-      if (!pdfResponse.ok) {
-        throw new Error('Failed to fetch PDF file');
+      if (isInIframe) {
+        // If in iframe, try to open in parent window
+        window.parent.postMessage({ 
+          type: "OPEN_EXTERNAL_URL", 
+          data: { url: kit.pdfUrl } 
+        }, "*");
+        toast.success('Opening PDF in new tab...');
+      } else {
+        // Open in new tab normally
+        window.open(kit.pdfUrl, '_blank', 'noopener,noreferrer');
+        toast.success('PDF opened in new tab');
       }
-      
-      const blob = await pdfResponse.blob();
-      
-      // Create a blob URL and trigger download
-      const blobUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = `${bookTitle}-book-club-kit.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Clean up the blob URL
-      window.URL.revokeObjectURL(blobUrl);
-      
-      toast.success('Download started!');
     } catch (error) {
-      console.error('Download error:', error);
-      toast.error('Failed to download book club kit. Please try again.');
+      console.error('Error opening PDF:', error);
+      toast.error('Failed to open book club kit. Please try again.');
     } finally {
-      setIsDownloading(null);
+      setIsOpening(null);
     }
   };
 
@@ -141,14 +134,14 @@ export default function BookClubPage() {
                   <Button 
                     className="w-full gap-2" 
                     size="lg"
-                    onClick={() => handleDownload(4, 'billy-the-lion-boy')}
-                    disabled={isDownloading === 4}
+                    onClick={() => handleOpenPDF(4, 'billy-the-lion-boy')}
+                    disabled={isOpening === 4}
                   >
-                    <Download className="h-5 w-5" />
-                    {isDownloading === 4 ? 'Downloading...' : 'Download Book 1 Club Kit (PDF)'}
+                    <ExternalLink className="h-5 w-5" />
+                    {isOpening === 4 ? 'Opening PDF...' : 'View Book 1 Club Kit (PDF)'}
                   </Button>
                   <p className="text-xs text-muted-foreground text-center mt-2">
-                    Comprehensive discussion guide and activities
+                    Opens in new tab • Save from PDF viewer
                   </p>
                 </div>
               </CardContent>
@@ -213,14 +206,14 @@ export default function BookClubPage() {
                   <Button 
                     className="w-full gap-2" 
                     size="lg"
-                    onClick={() => handleDownload(5, 'billy-bluma-double-trouble')}
-                    disabled={isDownloading === 5}
+                    onClick={() => handleOpenPDF(5, 'billy-bluma-double-trouble')}
+                    disabled={isOpening === 5}
                   >
-                    <Download className="h-5 w-5" />
-                    {isDownloading === 5 ? 'Downloading...' : 'Download Book 2 Club Kit (PDF)'}
+                    <ExternalLink className="h-5 w-5" />
+                    {isOpening === 5 ? 'Opening PDF...' : 'View Book 2 Club Kit (PDF)'}
                   </Button>
                   <p className="text-xs text-muted-foreground text-center mt-2">
-                    Comprehensive discussion guide and activities
+                    Opens in new tab • Save from PDF viewer
                   </p>
                 </div>
               </CardContent>
@@ -285,14 +278,14 @@ export default function BookClubPage() {
                   <Button 
                     className="w-full gap-2" 
                     size="lg"
-                    onClick={() => handleDownload(6, 'secret-hero-flying-lion')}
-                    disabled={isDownloading === 6}
+                    onClick={() => handleOpenPDF(6, 'secret-hero-flying-lion')}
+                    disabled={isOpening === 6}
                   >
-                    <Download className="h-5 w-5" />
-                    {isDownloading === 6 ? 'Downloading...' : 'Download Book 3 Club Kit (PDF)'}
+                    <ExternalLink className="h-5 w-5" />
+                    {isOpening === 6 ? 'Opening PDF...' : 'View Book 3 Club Kit (PDF)'}
                   </Button>
                   <p className="text-xs text-muted-foreground text-center mt-2">
-                    Comprehensive discussion guide and activities
+                    Opens in new tab • Save from PDF viewer
                   </p>
                 </div>
               </CardContent>
