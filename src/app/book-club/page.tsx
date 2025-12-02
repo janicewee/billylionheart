@@ -32,6 +32,9 @@ export default function BookClubPage() {
       
       const kit = kits[0];
       
+      // Convert relative URL to absolute URL
+      const absoluteUrl = `${window.location.origin}${kit.pdfUrl}`;
+      
       // Open PDF in new tab
       const isInIframe = window.self !== window.top;
       
@@ -39,12 +42,12 @@ export default function BookClubPage() {
         // If in iframe, try to open in parent window
         window.parent.postMessage({ 
           type: "OPEN_EXTERNAL_URL", 
-          data: { url: kit.pdfUrl } 
+          data: { url: absoluteUrl } 
         }, "*");
         toast.success('Opening PDF in new tab...');
       } else {
         // Open in new tab normally
-        window.open(kit.pdfUrl, '_blank', 'noopener,noreferrer');
+        window.open(absoluteUrl, '_blank', 'noopener,noreferrer');
         toast.success('PDF opened in new tab');
       }
     } catch (error) {
