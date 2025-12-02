@@ -284,7 +284,7 @@ export default function BookClubPage() {
                   </ul>
                 </div>
 
-                <div className="pt-4 space-y-2">
+                <div className="pt-4">
                   <Button 
                     className="w-full gap-2" 
                     size="lg"
@@ -295,22 +295,8 @@ export default function BookClubPage() {
                       View Book 3 Club Kit
                     </Link>
                   </Button>
-                  <Button 
-                    className="w-full gap-2" 
-                    size="lg"
-                    variant="outline"
-                    asChild
-                  >
-                    <a 
-                      href="/book-club-kits/Secret_Hero_His_Flying_Lion_Book_Club_Kit.pdf" 
-                      download="Secret_Hero_His_Flying_Lion_Book_Club_Kit.pdf"
-                    >
-                      <Download className="h-5 w-5" />
-                      Download Book 3 Club Kit (PDF)
-                    </a>
-                  </Button>
                   <p className="text-xs text-muted-foreground text-center mt-2">
-                    View online or download PDF
+                    View online
                   </p>
                 </div>
               </CardContent>
