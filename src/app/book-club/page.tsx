@@ -16,11 +16,11 @@ export default function BookClubPage() {
     setIsOpening(bookId);
     
     try {
-      // Map book IDs to their public PDF paths with proper encoding
+      // Map book IDs to their public PDF paths
       const pdfPaths: Record<number, string> = {
         4: '/book-club-kits/Billy_The_Lion_Boy_Book_Club_Kit_UPDATED.pdf',
         5: '/book-club-kits/Billy_And_Bluma_Double_Trouble_Book_Club_Kit.pdf',
-        6: '/book-club-kits/Secret_Hero_His_Flying_Lion_Book_Club_Kit.pdf'
+        6: '/book-club-kits/Secret Hero & His Flying Lion Book Club Kit.pdf'
       };
 
       const pdfPath = pdfPaths[bookId];
@@ -30,7 +30,7 @@ export default function BookClubPage() {
         return;
       }
 
-      // Encode the URL properly for special characters
+      // Encode the URL properly - split by '/' and encode each segment
       const encodedPath = pdfPath.split('/').map(segment => encodeURIComponent(segment)).join('/');
       const fullUrl = `${window.location.origin}${encodedPath}`;
       
