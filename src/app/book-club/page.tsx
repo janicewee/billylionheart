@@ -16,10 +16,25 @@ export default function BookClubPage() {
     setIsOpening(bookId);
     
     try {
-      // Use the dedicated PDF serving API route
-      const pdfUrl = `/api/book-club-kits/pdf?bookId=${bookId}`;
+      // Map book IDs to their public PDF paths with proper encoding
+      const pdfPaths: Record<number, string> = {
+        4: '/book-club-kits/Billy_The_Lion_Boy_Book_Club_Kit_UPDATED.pdf',
+        5: '/book-club-kits/Billy_And_Bluma_Double_Trouble_Book_Club_Kit.pdf',
+        6: '/book-club-kits/Secret Hero & His Flying Lion Book Club Kit.pdf'
+      };
+
+      const pdfPath = pdfPaths[bookId];
       
-      console.log('Opening PDF:', pdfUrl);
+      if (!pdfPath) {
+        toast.error('Book club kit not found');
+        return;
+      }
+
+      // Encode the URL properly for special characters
+      const encodedPath = pdfPath.split('/').map(segment => encodeURIComponent(segment)).join('/');
+      const fullUrl = `${window.location.origin}${encodedPath}`;
+      
+      console.log('Opening PDF:', fullUrl);
       
       // Check if we're in an iframe first
       const isInIframe = window.self !== window.top;
@@ -28,12 +43,12 @@ export default function BookClubPage() {
         // In iframe: use postMessage to open in parent
         window.parent.postMessage({ 
           type: "OPEN_EXTERNAL_URL", 
-          data: { url: `${window.location.origin}${pdfUrl}` } 
+          data: { url: fullUrl } 
         }, "*");
         toast.success('Opening PDF in new tab...');
       } else {
         // Not in iframe: try normal popup
-        const newWindow = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+        const newWindow = window.open(fullUrl, '_blank', 'noopener,noreferrer');
         
         if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
           // Popup was blocked
