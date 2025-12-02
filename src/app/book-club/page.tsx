@@ -30,9 +30,8 @@ export default function BookClubPage() {
         return;
       }
 
-      // Encode the URL properly - split by '/' and encode each segment
-      const encodedPath = pdfPath.split('/').map(segment => encodeURIComponent(segment)).join('/');
-      const fullUrl = `${window.location.origin}${encodedPath}`;
+      // Use direct path without complex encoding
+      const fullUrl = `${window.location.origin}${pdfPath}`;
       
       console.log('Opening PDF:', fullUrl);
       
