@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const pdfFiles: Record<string, string> = {
       '4': 'Billy_The_Lion_Boy_Book_Club_Kit_UPDATED.pdf',
       '5': 'Billy_And_Bluma_Double_Trouble_Book_Club_Kit.pdf',
-      '6': 'Secret Hero & His Flying Lion Book Club Kit.pdf'
+      '6': 'Secret_Hero_His_Flying_Lion_Book_Club_Kit.pdf'
     };
 
     const filename = pdfFiles[bookId];
