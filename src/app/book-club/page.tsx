@@ -32,8 +32,9 @@ export default function BookClubPage() {
       
       const kit = kits[0];
       
-      // Convert relative URL to absolute URL
-      const absoluteUrl = `${window.location.origin}${kit.pdfUrl}`;
+      // Properly encode the URL to handle spaces and special characters
+      const url = new URL(kit.pdfUrl, window.location.origin);
+      const absoluteUrl = url.href;
       
       // Open PDF in new tab
       const isInIframe = window.self !== window.top;
