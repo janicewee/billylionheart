@@ -32,23 +32,27 @@ export default function BookClubPage() {
       
       const kit = kits[0];
       
-      // Properly encode the URL to handle spaces and special characters
-      const url = new URL(kit.pdfUrl, window.location.origin);
-      const absoluteUrl = url.href;
+      // Create a proper absolute URL using window.location
+      const pdfPath = kit.pdfUrl.startsWith('/') ? kit.pdfUrl : `/${kit.pdfUrl}`;
+      const absoluteUrl = `${window.location.protocol}//${window.location.host}${pdfPath}`;
       
-      // Open PDF in new tab
-      const isInIframe = window.self !== window.top;
+      console.log('Opening PDF:', absoluteUrl);
       
-      if (isInIframe) {
-        // If in iframe, try to open in parent window
-        window.parent.postMessage({ 
-          type: "OPEN_EXTERNAL_URL", 
-          data: { url: absoluteUrl } 
-        }, "*");
-        toast.success('Opening PDF in new tab...');
+      // Try to open PDF - handle iframe context
+      const newWindow = window.open(absoluteUrl, '_blank', 'noopener,noreferrer');
+      
+      if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+        // Popup was blocked or failed to open
+        // Fallback: try iframe postMessage
+        const isInIframe = window.self !== window.top;
+        if (isInIframe) {
+          window.parent.postMessage({ 
+            type: "OPEN_EXTERNAL_URL", 
+            data: { url: absoluteUrl } 
+          }, "*");
+        }
+        toast.info('Opening PDF... If blocked, please allow popups for this site');
       } else {
-        // Open in new tab normally
-        window.open(absoluteUrl, '_blank', 'noopener,noreferrer');
         toast.success('PDF opened in new tab');
       }
     } catch (error) {
