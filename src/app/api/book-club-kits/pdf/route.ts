@@ -28,11 +28,15 @@ export async function GET(request: NextRequest) {
     const filePath = join(process.cwd(), 'public', 'book-club-kits', filename);
     const fileBuffer = await readFile(filePath);
 
+    // Encode filename for Content-Disposition header (RFC 6266)
+    const encodedFilename = encodeURIComponent(filename);
+    const contentDisposition = `inline; filename="${filename.replace(/"/g, '\\"')}"; filename*=UTF-8''${encodedFilename}`;
+
     // Return the PDF with proper headers
     return new NextResponse(fileBuffer, {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `inline; filename="${filename}"`,
+        'Content-Disposition': contentDisposition,
         'Cache-Control': 'public, max-age=31536000, immutable',
       },
     });
