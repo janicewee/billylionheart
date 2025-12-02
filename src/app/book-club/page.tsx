@@ -16,30 +16,13 @@ export default function BookClubPage() {
     setIsOpening(bookId);
     
     try {
-      // Fetch the book club kit from the API
-      const response = await fetch(`/api/book-club-kits?bookId=${bookId}`);
+      // Use the dedicated PDF serving API route
+      const pdfUrl = `/api/book-club-kits/pdf?bookId=${bookId}`;
       
-      if (!response.ok) {
-        throw new Error('Failed to fetch book club kit');
-      }
-      
-      const kits = await response.json();
-      
-      if (!kits || kits.length === 0) {
-        toast.error('Book club kit not found');
-        return;
-      }
-      
-      const kit = kits[0];
-      
-      // Create a proper absolute URL using window.location
-      const pdfPath = kit.pdfUrl.startsWith('/') ? kit.pdfUrl : `/${kit.pdfUrl}`;
-      const absoluteUrl = `${window.location.protocol}//${window.location.host}${pdfPath}`;
-      
-      console.log('Opening PDF:', absoluteUrl);
+      console.log('Opening PDF:', pdfUrl);
       
       // Try to open PDF - handle iframe context
-      const newWindow = window.open(absoluteUrl, '_blank', 'noopener,noreferrer');
+      const newWindow = window.open(pdfUrl, '_blank', 'noopener,noreferrer');
       
       if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
         // Popup was blocked or failed to open
@@ -48,7 +31,7 @@ export default function BookClubPage() {
         if (isInIframe) {
           window.parent.postMessage({ 
             type: "OPEN_EXTERNAL_URL", 
-            data: { url: absoluteUrl } 
+            data: { url: `${window.location.origin}${pdfUrl}` } 
           }, "*");
         }
         toast.info('Opening PDF... If blocked, please allow popups for this site');
