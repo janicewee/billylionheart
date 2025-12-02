@@ -8,6 +8,7 @@ import { Download, BookOpen, Users, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export default function BookClubPage() {
   const [isOpening, setIsOpening] = useState<number | null>(null);
@@ -287,11 +288,12 @@ export default function BookClubPage() {
                   <Button 
                     className="w-full gap-2" 
                     size="lg"
-                    onClick={() => handleOpenPDF(6, 'secret-hero-flying-lion')}
-                    disabled={isOpening === 6}
+                    asChild
                   >
-                    <ExternalLink className="h-5 w-5" />
-                    {isOpening === 6 ? 'Opening PDF...' : 'View Book 3 Club Kit (PDF)'}
+                    <Link href="/book-club/book3-kit">
+                      <BookOpen className="h-5 w-5" />
+                      View Book 3 Club Kit
+                    </Link>
                   </Button>
                   <Button 
                     className="w-full gap-2" 
@@ -308,7 +310,7 @@ export default function BookClubPage() {
                     </a>
                   </Button>
                   <p className="text-xs text-muted-foreground text-center mt-2">
-                    Opens in new tab • Or download to view locally
+                    View online or download PDF
                   </p>
                 </div>
               </CardContent>
