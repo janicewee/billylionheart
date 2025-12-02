@@ -7,8 +7,49 @@ import { Button } from "@/components/ui/button";
 import { Download, BookOpen, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { toast } from "sonner";
 
 export default function BookClubPage() {
+  const [isDownloading, setIsDownloading] = useState<number | null>(null);
+
+  const handleDownload = async (bookId: number, bookTitle: string) => {
+    setIsDownloading(bookId);
+    
+    try {
+      // Fetch the book club kit from the API
+      const response = await fetch(`/api/book-club-kits?bookId=${bookId}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch book club kit');
+      }
+      
+      const kits = await response.json();
+      
+      if (!kits || kits.length === 0) {
+        toast.error('Book club kit not found');
+        return;
+      }
+      
+      const kit = kits[0];
+      
+      // Download the PDF
+      const link = document.createElement('a');
+      link.href = kit.pdfUrl;
+      link.download = `${bookTitle}-book-club-kit.pdf`;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      toast.success('Download started!');
+    } catch (error) {
+      console.error('Download error:', error);
+      toast.error('Failed to download book club kit');
+    } finally {
+      setIsDownloading(null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -85,9 +126,14 @@ export default function BookClubPage() {
                 </div>
 
                 <div className="pt-4">
-                  <Button className="w-full gap-2" size="lg">
+                  <Button 
+                    className="w-full gap-2" 
+                    size="lg"
+                    onClick={() => handleDownload(4, 'billy-the-lion-boy')}
+                    disabled={isDownloading === 4}
+                  >
                     <Download className="h-5 w-5" />
-                    Download Book 1 Club Kit (PDF)
+                    {isDownloading === 4 ? 'Downloading...' : 'Download Book 1 Club Kit (PDF)'}
                   </Button>
                   <p className="text-xs text-muted-foreground text-center mt-2">
                     Comprehensive discussion guide and activities
@@ -152,9 +198,14 @@ export default function BookClubPage() {
                 </div>
 
                 <div className="pt-4">
-                  <Button className="w-full gap-2" size="lg">
+                  <Button 
+                    className="w-full gap-2" 
+                    size="lg"
+                    onClick={() => handleDownload(5, 'billy-bluma-double-trouble')}
+                    disabled={isDownloading === 5}
+                  >
                     <Download className="h-5 w-5" />
-                    Download Book 2 Club Kit (PDF)
+                    {isDownloading === 5 ? 'Downloading...' : 'Download Book 2 Club Kit (PDF)'}
                   </Button>
                   <p className="text-xs text-muted-foreground text-center mt-2">
                     Comprehensive discussion guide and activities
@@ -219,9 +270,14 @@ export default function BookClubPage() {
                 </div>
 
                 <div className="pt-4">
-                  <Button className="w-full gap-2" size="lg">
+                  <Button 
+                    className="w-full gap-2" 
+                    size="lg"
+                    onClick={() => handleDownload(6, 'secret-hero-flying-lion')}
+                    disabled={isDownloading === 6}
+                  >
                     <Download className="h-5 w-5" />
-                    Download Book 3 Club Kit (PDF)
+                    {isDownloading === 6 ? 'Downloading...' : 'Download Book 3 Club Kit (PDF)'}
                   </Button>
                   <p className="text-xs text-muted-foreground text-center mt-2">
                     Comprehensive discussion guide and activities
