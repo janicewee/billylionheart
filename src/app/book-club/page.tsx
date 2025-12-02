@@ -32,19 +32,31 @@ export default function BookClubPage() {
       
       const kit = kits[0];
       
-      // Download the PDF
+      // Fetch the PDF as a blob
+      const pdfResponse = await fetch(kit.pdfUrl);
+      
+      if (!pdfResponse.ok) {
+        throw new Error('Failed to fetch PDF file');
+      }
+      
+      const blob = await pdfResponse.blob();
+      
+      // Create a blob URL and trigger download
+      const blobUrl = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = kit.pdfUrl;
+      link.href = blobUrl;
       link.download = `${bookTitle}-book-club-kit.pdf`;
-      link.target = '_blank';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       
+      // Clean up the blob URL
+      window.URL.revokeObjectURL(blobUrl);
+      
       toast.success('Download started!');
     } catch (error) {
       console.error('Download error:', error);
-      toast.error('Failed to download book club kit');
+      toast.error('Failed to download book club kit. Please try again.');
     } finally {
       setIsDownloading(null);
     }
