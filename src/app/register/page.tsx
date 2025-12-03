@@ -48,26 +48,35 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const { error } = await authClient.signUp.email({
+      console.log("🔄 Attempting registration with:", { email, name });
+      
+      const result = await authClient.signUp.email({
         email,
         name,
         password
       });
 
-      if (error) {
+      console.log("📥 Registration response:", result);
+
+      if (result.error) {
+        console.error("❌ Registration error object:", JSON.stringify(result.error, null, 2));
+        
         // Check for specific error codes or messages
-        if (error.code === "USER_ALREADY_EXISTS" || error.message?.includes("already exists") || error.message?.includes("existing email")) {
+        if (result.error.code === "USER_ALREADY_EXISTS" || result.error.message?.includes("already exists") || result.error.message?.includes("existing email")) {
           toast.error("This email is already registered. Please login instead or use a different email.");
         } else {
-          toast.error(error.message || getErrorMessage(error.code || ""));
+          const errorMsg = result.error.message || getErrorMessage(result.error.code || "");
+          console.error("❌ Showing error to user:", errorMsg);
+          toast.error(errorMsg);
         }
         return;
       }
 
+      console.log("✅ Registration successful!");
       toast.success("Registration successful! Please log in.");
       router.push("/login?registered=true");
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error("💥 Registration exception:", error);
       toast.error("An error occurred during registration");
     } finally {
       setLoading(false);
