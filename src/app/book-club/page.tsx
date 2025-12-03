@@ -288,15 +288,14 @@ export default function BookClubPage() {
                   <Button 
                     className="w-full gap-2" 
                     size="lg"
-                    asChild
+                    onClick={() => handleOpenPDF(6, 'secret-hero-flying-lion')}
+                    disabled={isOpening === 6}
                   >
-                    <Link href="/book-club/book3-kit">
-                      <BookOpen className="h-5 w-5" />
-                      View Book 3 Club Kit
-                    </Link>
+                    <ExternalLink className="h-5 w-5" />
+                    {isOpening === 6 ? 'Opening PDF...' : 'View Book 3 Club Kit (PDF)'}
                   </Button>
                   <p className="text-xs text-muted-foreground text-center mt-2">
-                    View online
+                    Opens in new tab • Save from PDF viewer
                   </p>
                 </div>
               </CardContent>
