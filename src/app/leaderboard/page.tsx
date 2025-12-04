@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Medal, Star, MessageSquare, Award } from "lucide-react";
+import { Trophy, Medal, Star, MessageSquare, Award, AlertCircle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 
 interface UserPoints {
   id: number;
@@ -18,6 +20,7 @@ interface UserPoints {
 export default function LeaderboardPage() {
   const [leaderboard, setLeaderboard] = useState<UserPoints[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchLeaderboard();
@@ -25,11 +28,25 @@ export default function LeaderboardPage() {
 
   const fetchLeaderboard = async () => {
     try {
+      setError(null);
       const response = await fetch("/api/leaderboard?limit=50");
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch leaderboard: ${response.status}`);
+      }
+      
       const data = await response.json();
-      setLeaderboard(data);
+      
+      // Ensure data is an array
+      if (Array.isArray(data)) {
+        setLeaderboard(data);
+      } else {
+        throw new Error("Invalid leaderboard data format");
+      }
     } catch (error) {
       console.error("Failed to fetch leaderboard:", error);
+      setError(error instanceof Error ? error.message : "Failed to load leaderboard");
+      setLeaderboard([]);
     } finally {
       setLoading(false);
     }
@@ -103,6 +120,25 @@ export default function LeaderboardPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Error Alert */}
+        {error && (
+          <Alert variant="destructive" className="max-w-4xl mx-auto mb-8">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error Loading Leaderboard</AlertTitle>
+            <AlertDescription className="flex items-center justify-between">
+              <span>{error}</span>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={fetchLeaderboard}
+                className="ml-4"
+              >
+                Try Again
+              </Button>
+            </AlertDescription>
+          </Alert>
+        )}
 
         {/* Leaderboard */}
         <Card className="max-w-4xl mx-auto">
