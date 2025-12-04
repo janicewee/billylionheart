@@ -8,13 +8,24 @@ import { db } from "@/db";
 import { books } from "@/db/schema";
 import { asc } from "drizzle-orm";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function HomePage() {
-  // Fetch books directly - no Suspense needed
+  // Fetch books directly with detailed error logging
   let booksList;
+  let errorMessage = null;
+  
   try {
+    console.log("[HomePage] Attempting to fetch books from database...");
+    console.log("[HomePage] TURSO_CONNECTION_URL exists:", !!process.env.TURSO_CONNECTION_URL);
+    console.log("[HomePage] TURSO_AUTH_TOKEN exists:", !!process.env.TURSO_AUTH_TOKEN);
+    
     booksList = await db.select().from(books).orderBy(asc(books.bookNumber));
+    console.log("[HomePage] Successfully fetched books, count:", booksList.length);
   } catch (error) {
-    console.error("Error loading books:", error);
+    console.error("[HomePage] Error loading books:", error);
+    errorMessage = error instanceof Error ? error.message : "Unknown error";
     booksList = [];
   }
 
@@ -68,6 +79,11 @@ export default async function HomePage() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           The Book Series
         </h2>
+        {errorMessage && (
+          <p className="text-center text-destructive mb-4">
+            Database error: {errorMessage}
+          </p>
+        )}
         {booksList && booksList.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {booksList.map((book) => (
@@ -104,7 +120,14 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <p className="text-center text-muted-foreground">No books available at the moment.</p>
+          <div className="text-center space-y-2">
+            <p className="text-muted-foreground">No books available at the moment.</p>
+            {!errorMessage && (
+              <p className="text-sm text-muted-foreground">
+                (Database connected but no records found)
+              </p>
+            )}
+          </div>
         )}
       </section>
 
