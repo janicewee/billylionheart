@@ -246,8 +246,34 @@ export default function BookClubPage() {
                 <div className="prose prose-sm max-w-none">
                   <h3 className="font-semibold text-lg mb-3">About the Book</h3>
                   <p className="text-muted-foreground">
-                    Secret Hero & His Flying Lion is the third book in the continuing adventures of Billy Lionheart, a young human boy with extraordinary gifts, including super strength and the ability to speak all animal languages. Raised by his adoptive father, Leonard Lion, Billy navigates the world of St. Lydia's Academy alongside his childhood friend, Bluma. This book delves into what it means to be a hero.
+                    In this thrilling third installment of The Adventures of Billy Lionheart, our hero begins his first year at St. Lydia's Academy, navigating school life, bullies, mysteries—and his lion guardian Leonard's hilarious and heartfelt attempts to fit into human society. An international school trip to Celestial City reveals history, faith, danger, and divine intervention. When Leonard is suddenly poisoned, Billy, Bluma, and their friends must uncover the truth before it's too late.
                   </p>
+                </div>
+
+                <div className="space-y-3">
+                  <h4 className="font-semibold">Themes:</h4>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>Faith and Divine Protection</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>Friendship and Loyalty</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>Courage and Sacrifice</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>Identity & Purpose</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>Justice and Mercy</span>
+                    </li>
+                  </ul>
                 </div>
 
                 <div className="space-y-3">
@@ -255,31 +281,23 @@ export default function BookClubPage() {
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>Character Spotlight (Billy, Leonard Lion, Bluma, Professor Abel, Samson)</span>
+                      <span>5 Discussion Questions on themes of faith, forgiveness, courage, and justice</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>Discussion Questions on themes of loyalty, rebellion, and heroism</span>
+                      <span>Character Exploration Activities (Character Map, Debate Activity)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>Exploration of the blend between school setting and high fantasy elements</span>
+                      <span>Creative Writing Prompt: Write from Leonard's perspective during the school trip</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>World Building discussion: Which superpower would you choose?</span>
+                      <span>Fun Extras: Draw Your Own Flying Lion, Make a Chaperone Pass</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span>Creative Writing Prompts (Professor Abel's perspective)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary mt-1">•</span>
-                      <span>Lion-Hearted Challenge: Animal Communication activity</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary mt-1">•</span>
-                      <span>Related Reading suggestions</span>
+                      <span>Group Discussion: What would YOU do if you discovered your classmate had super strength?</span>
                     </li>
                   </ul>
                 </div>
