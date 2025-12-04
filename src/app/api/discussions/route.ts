@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
-import { discussions } from '@/db/schema';
+import { discussions, userPoints } from '@/db/schema';
 import { eq, desc, isNull, and } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
@@ -102,6 +102,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const timestamp = new Date().toISOString();
+    const trimmedUserId = userId.trim();
+
     // Prepare insert data
     const insertData: {
       userId: string;
@@ -111,11 +114,11 @@ export async function POST(request: NextRequest) {
       createdAt: string;
       updatedAt: string;
     } = {
-      userId: userId.trim(),
+      userId: trimmedUserId,
       bookId: parseInt(bookId.toString()),
       content: content.trim(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      createdAt: timestamp,
+      updatedAt: timestamp,
     };
 
     // Only include parentId if it's provided and valid
@@ -128,6 +131,38 @@ export async function POST(request: NextRequest) {
     const newDiscussion = await db.insert(discussions)
       .values(insertData)
       .returning();
+
+    // Update user points - add 5 points for discussion
+    try {
+      const existingPoints = await db.select()
+        .from(userPoints)
+        .where(eq(userPoints.userId, trimmedUserId))
+        .limit(1);
+
+      if (existingPoints.length > 0) {
+        // Update existing record
+        await db.update(userPoints)
+          .set({
+            totalPoints: existingPoints[0].totalPoints + 5,
+            discussionsCount: existingPoints[0].discussionsCount + 1,
+            updatedAt: timestamp,
+          })
+          .where(eq(userPoints.userId, trimmedUserId));
+      } else {
+        // Create new record
+        await db.insert(userPoints)
+          .values({
+            userId: trimmedUserId,
+            totalPoints: 5,
+            reviewsCount: 0,
+            discussionsCount: 1,
+            updatedAt: timestamp,
+          });
+      }
+    } catch (pointsError) {
+      console.error('Error updating user points:', pointsError);
+      // Don't fail the discussion creation if points update fails
+    }
 
     return NextResponse.json(newDiscussion[0], { status: 201 });
   } catch (error) {
