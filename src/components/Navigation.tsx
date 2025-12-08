@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { authClient, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { BookOpen, Users, Library, Trophy, LogOut, User, Book, Menu, X } from "lucide-react";
+import { BookOpen, Users, Library, Trophy, LogOut, User, Book, Menu, X, ChefHat } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,6 +40,7 @@ export default function Navigation() {
     { href: "/characters", label: "Characters", icon: Users },
     { href: "/book-club", label: "Book Club", icon: Library },
     { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
+    { href: "/secret-recipes", label: "Secret Recipes", icon: ChefHat },
   ];
 
   return (
