@@ -99,6 +99,20 @@ export default function BookClubPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
+                <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
+                  <video
+                    src="/billythelionboybookcover.mp4"
+                    className="h-full w-full object-cover"
+                    autoPlay
+                    playsInline
+                    loop
+                    muted
+                    aria-label="Billy the Lion Boy Book Cover Video"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+
                 <div className="prose prose-sm max-w-none">
                   <h3 className="font-semibold text-lg mb-3">About the Book</h3>
                   <p className="text-muted-foreground">
@@ -153,6 +167,12 @@ export default function BookClubPage() {
                   <p className="text-xs text-muted-foreground text-center mt-2">
                     Opens in new tab • Save from PDF viewer
                   </p>
+                  <Link href="/books/4" className="block mt-3">
+                    <Button variant="outline" className="w-full gap-2" size="lg">
+                      <BookOpen className="h-5 w-5" />
+                      Buy this Book
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -171,6 +191,20 @@ export default function BookClubPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
+                <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
+                  <video
+                    src="/billyandblumabookcover.mp4"
+                    className="h-full w-full object-cover"
+                    autoPlay
+                    playsInline
+                    loop
+                    muted
+                    aria-label="Billy & Bluma: Double Trouble Book Cover Video"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+
                 <div className="prose prose-sm max-w-none">
                   <h3 className="font-semibold text-lg mb-3">About the Book</h3>
                   <p className="text-muted-foreground">
@@ -225,6 +259,12 @@ export default function BookClubPage() {
                   <p className="text-xs text-muted-foreground text-center mt-2">
                     Opens in new tab • Save from PDF viewer
                   </p>
+                  <Link href="/books/5" className="block mt-3">
+                    <Button variant="outline" className="w-full gap-2" size="lg">
+                      <BookOpen className="h-5 w-5" />
+                      Buy this Book
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -243,6 +283,20 @@ export default function BookClubPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
+                <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
+                  <video
+                    src="/secretherobookcover.mp4"
+                    className="h-full w-full object-cover"
+                    autoPlay
+                    playsInline
+                    loop
+                    muted
+                    aria-label="Secret Hero & His Flying Lion Book Cover Video"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+
                 <div className="prose prose-sm max-w-none">
                   <h3 className="font-semibold text-lg mb-3">About the Book</h3>
                   <p className="text-muted-foreground">
@@ -315,6 +369,12 @@ export default function BookClubPage() {
                   <p className="text-xs text-muted-foreground text-center mt-2">
                     Opens in new tab • Save from PDF viewer
                   </p>
+                  <Link href="/books/6" className="block mt-3">
+                    <Button variant="outline" className="w-full gap-2" size="lg">
+                      <BookOpen className="h-5 w-5" />
+                      Buy this Book
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
