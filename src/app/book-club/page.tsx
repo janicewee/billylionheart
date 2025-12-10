@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import Link from "next/link";
+
+const SUPABASE_STORAGE_URL = "https://qzshvawuymnbitocaktk.supabase.co/storage/v1/object/public/videos";
 
 export default function BookClubPage() {
   const [isOpening, setIsOpening] = useState<number | null>(null);
@@ -101,7 +103,7 @@ export default function BookClubPage() {
               <CardContent className="space-y-6">
                 <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
                   <video
-                    src="/billythelionboybookcover.mp4"
+                    src={`${SUPABASE_STORAGE_URL}/billythelionboybookcover.mp4`}
                     className="h-full w-full object-cover"
                     autoPlay
                     playsInline
@@ -193,7 +195,7 @@ export default function BookClubPage() {
               <CardContent className="space-y-6">
                 <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
                   <video
-                    src="/billyandblumabookcover.mp4"
+                    src={`${SUPABASE_STORAGE_URL}/billyandblumabookcover.mp4`}
                     className="h-full w-full object-cover"
                     autoPlay
                     playsInline
@@ -285,7 +287,7 @@ export default function BookClubPage() {
               <CardContent className="space-y-6">
                 <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
                   <video
-                    src="/secretherobookcover.mp4"
+                    src={`${SUPABASE_STORAGE_URL}/secretherobookcover.mp4`}
                     className="h-full w-full object-cover"
                     autoPlay
                     playsInline
