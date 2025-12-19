@@ -10,7 +10,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import Link from "next/link";
 
-const SUPABASE_STORAGE_URL = "https://qzshvawuymnbitocaktk.supabase.co/storage/v1/object/public/videos";
+// Use local videos from the public folder to avoid Supabase inactivity pauses
+const LOCAL_VIDEO_PATH = "";
 
 export default function BookClubPage() {
   const [isOpening, setIsOpening] = useState<number | null>(null);
@@ -103,7 +104,7 @@ export default function BookClubPage() {
               <CardContent className="space-y-6">
                 <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
                   <video
-                    src={`${SUPABASE_STORAGE_URL}/billythelionboybookcover.mp4`}
+                    src="/billythelionboybookcover.mp4"
                     className="h-full w-full object-cover"
                     autoPlay
                     playsInline
@@ -193,19 +194,20 @@ export default function BookClubPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
-                  <video
-                    src={`${SUPABASE_STORAGE_URL}/billyandblumabookcover.mp4`}
-                    className="h-full w-full object-cover"
-                    autoPlay
-                    playsInline
-                    loop
-                    muted
-                    aria-label="Billy & Bluma: Double Trouble Book Cover Video"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+                  <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
+                    <video
+                      src="/billyandblumabookcover.mp4"
+                      className="h-full w-full object-cover"
+                      autoPlay
+                      playsInline
+                      loop
+                      muted
+                      aria-label="Billy & Bluma: Double Trouble Book Cover Video"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+
 
                 <div className="prose prose-sm max-w-none">
                   <h3 className="font-semibold text-lg mb-3">About the Book</h3>
@@ -285,19 +287,20 @@ export default function BookClubPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
-                  <video
-                    src={`${SUPABASE_STORAGE_URL}/secretherobookcover.mp4`}
-                    className="h-full w-full object-cover"
-                    autoPlay
-                    playsInline
-                    loop
-                    muted
-                    aria-label="Secret Hero & His Flying Lion Book Cover Video"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+                  <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
+                    <video
+                      src="/secretherobookcover.mp4"
+                      className="h-full w-full object-cover"
+                      autoPlay
+                      playsInline
+                      loop
+                      muted
+                      aria-label="Secret Hero & His Flying Lion Book Cover Video"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+
 
                 <div className="prose prose-sm max-w-none">
                   <h3 className="font-semibold text-lg mb-3">About the Book</h3>
