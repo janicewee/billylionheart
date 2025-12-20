@@ -17,12 +17,7 @@ export default async function HomePage() {
   let errorMessage = null;
   
   try {
-    console.log("[HomePage] Attempting to fetch books from database...");
-    console.log("[HomePage] TURSO_CONNECTION_URL exists:", !!process.env.TURSO_CONNECTION_URL);
-    console.log("[HomePage] TURSO_AUTH_TOKEN exists:", !!process.env.TURSO_AUTH_TOKEN);
-    
     booksList = await db.select().from(books).orderBy(asc(books.bookNumber));
-    console.log("[HomePage] Successfully fetched books, count:", booksList.length);
   } catch (error) {
     console.error("[HomePage] Error loading books:", error);
     errorMessage = error instanceof Error ? error.message : "Unknown error";
