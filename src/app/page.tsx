@@ -12,17 +12,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function HomePage() {
-  // Fetch books directly with detailed error logging
-  let booksList;
-  let errorMessage = null;
-  
-  try {
-    booksList = await db.select().from(books).orderBy(asc(books.bookNumber));
-  } catch (error) {
-    console.error("[HomePage] Error loading books:", error);
-    errorMessage = error instanceof Error ? error.message : "Unknown error";
-    booksList = [];
-  }
+  const booksList = await db.select().from(books).orderBy(asc(books.bookNumber)).catch(() => []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
