@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { ChefHat, Clock, Flame } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SecretRecipesPage() {
     const recipes = [
@@ -13,7 +14,8 @@ export default function SecretRecipesPage() {
         prepTime: "45-55 minutes",
         servings: "16 squares",
         difficulty: "Easy",
-        tags: ["Keto", "Gluten-Free", "Dessert"]
+        tags: ["Keto", "Gluten-Free", "Dessert"],
+        image: null
       },
       {
         title: "Strawberry Chocolate Chip Scones",
@@ -22,7 +24,8 @@ export default function SecretRecipesPage() {
         prepTime: "20 minutes",
         servings: "12-16 scones",
         difficulty: "Easy",
-        tags: ["Breakfast", "Scones", "Treat"]
+        tags: ["Breakfast", "Scones", "Treat"],
+        image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/Screenshot-2025-12-20-at-8.46.28-PM-1766234806076.png?width=8000&height=8000&resize=contain"
       }
     ];
 
@@ -48,15 +51,25 @@ export default function SecretRecipesPage() {
         {/* Recipes Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {recipes.map((recipe) => (
-            <Card key={recipe.slug} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <CardHeader>
+            <Card key={recipe.slug} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
+              {recipe.image && (
+                <div className="relative h-48 w-full overflow-hidden">
+                  <Image
+                    src={recipe.image}
+                    alt={recipe.title}
+                    fill
+                    className="object-cover transition-transform hover:scale-105 duration-500"
+                  />
+                </div>
+              )}
+              <CardHeader className="flex-1">
                 <div className="flex items-start justify-between mb-2">
                   <ChefHat className="h-10 w-10 text-primary" />
-                  <div className="flex gap-1">
+                  <div className="flex flex-wrap gap-1 justify-end">
                     {recipe.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full"
+                        className="px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full whitespace-nowrap"
                       >
                         {tag}
                       </span>
@@ -64,7 +77,7 @@ export default function SecretRecipesPage() {
                   </div>
                 </div>
                 <CardTitle className="text-2xl">{recipe.title}</CardTitle>
-                <CardDescription className="text-base">
+                <CardDescription className="text-base line-clamp-2">
                   {recipe.description}
                 </CardDescription>
               </CardHeader>

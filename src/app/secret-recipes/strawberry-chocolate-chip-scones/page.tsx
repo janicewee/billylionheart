@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChefHat, Clock, Flame } from "lucide-react";
+import Image from "next/image";
 
 export default function StrawberrySconesPage() {
   const ingredients = [
@@ -63,6 +64,15 @@ export default function StrawberrySconesPage() {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Delightful scones with ground almonds, strawberries, and chocolate chips. Perfect for breakfast or a snack.
           </p>
+          <div className="relative aspect-video w-full max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-2xl mt-8">
+            <Image
+              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/Screenshot-2025-12-20-at-8.46.28-PM-1766234806076.png?width=8000&height=8000&resize=contain"
+              alt="Strawberry Chocolate Chip Scones"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
 
         {/* Recipe Info */}
