@@ -102,11 +102,6 @@ export default async function HomePage() {
         ) : (
           <div className="text-center space-y-2">
             <p className="text-muted-foreground">No books available at the moment.</p>
-            {!errorMessage && (
-              <p className="text-sm text-muted-foreground">
-                (Database connected but no records found)
-              </p>
-            )}
           </div>
         )}
       </section>
