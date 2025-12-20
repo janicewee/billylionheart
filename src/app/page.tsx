@@ -64,11 +64,6 @@ export default async function HomePage() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           The Book Series
         </h2>
-        {errorMessage && (
-          <p className="text-center text-destructive mb-4">
-            Database error: {errorMessage}
-          </p>
-        )}
         {booksList && booksList.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {booksList.map((book) => (
