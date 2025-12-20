@@ -5,17 +5,26 @@ import { ChefHat, Clock, Flame } from "lucide-react";
 import Link from "next/link";
 
 export default function SecretRecipesPage() {
-  const recipes = [
-    {
-      title: "Keto Brownies",
-      slug: "keto-brownies",
-      description: "Delicious gluten-free, keto-friendly brownies that are rich, fudgy, and perfect for any occasion.",
-      prepTime: "45-55 minutes",
-      servings: "16 squares",
-      difficulty: "Easy",
-      tags: ["Keto", "Gluten-Free", "Dessert"]
-    }
-  ];
+    const recipes = [
+      {
+        title: "Keto Brownies",
+        slug: "keto-brownies",
+        description: "Delicious gluten-free, keto-friendly brownies that are rich, fudgy, and perfect for any occasion.",
+        prepTime: "45-55 minutes",
+        servings: "16 squares",
+        difficulty: "Easy",
+        tags: ["Keto", "Gluten-Free", "Dessert"]
+      },
+      {
+        title: "Strawberry Chocolate Chip Scones",
+        slug: "strawberry-chocolate-chip-scones",
+        description: "Delightful scones with ground almonds, strawberries, and chocolate chips. Perfect for breakfast or a snack.",
+        prepTime: "20 minutes",
+        servings: "12-16 scones",
+        difficulty: "Easy",
+        tags: ["Breakfast", "Scones", "Treat"]
+      }
+    ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
