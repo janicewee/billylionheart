@@ -15,7 +15,10 @@
         "@hookform/resolvers": "^5.1.1",
         "@libsql/client": "^0.15.15",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "@libsql/linux-x64-gnu": "^0.5.22",
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         "@number-flow/react": "^0.5.10",
@@ -48,7 +51,10 @@
         "@react-three/drei": "^10.4.4",
         "@react-three/fiber": "^9.0.0-alpha.8",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "@supabase/supabase-js": "^2.45.4",
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         "@tabler/icons-react": "^3.35.0",
@@ -75,15 +81,19 @@
         "framer-motion": "^12.23.24",
         "input-otp": "^1.4.2",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "lightningcss": "^1.30.2",
         "lightningcss-darwin-x64": "^1.30.2",
         "lightningcss-linux-x64-gnu": "^1.30.2",
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         "lucide-react": "^0.552.0",
         "mini-svg-data-uri": "^1.4.4",
         "motion": "^12.23.24",
         "motion-dom": "^12.23.23",
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         "next": "15.3.6",
         "next-themes": "^0.4.6",
@@ -92,12 +102,17 @@
         "react-day-picker": "^9.8.0",
         "react-dom": "19.0.0",
 =======
+=======
+>>>>>>> Stashed changes
         "next": "15.3.5",
         "next-themes": "^0.4.6",
         "qss": "^3.0.0",
         "react": "^19.0.0",
         "react-day-picker": "^9.8.0",
         "react-dom": "^19.0.0",
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         "react-dropzone": "^14.3.8",
         "react-fast-marquee": "^1.6.5",
@@ -110,9 +125,14 @@
         "react-wrap-balancer": "^1.1.1",
         "recharts": "^3.0.2",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "resend": "^6.5.2",
         "simplex-noise": "^4.0.3",
         "sonner": "^2.0.7",
+=======
+        "simplex-noise": "^4.0.3",
+        "sonner": "^2.0.6",
+>>>>>>> Stashed changes
 =======
         "simplex-noise": "^4.0.3",
         "sonner": "^2.0.6",
@@ -125,7 +145,11 @@
         "three-globe": "^2.43.0",
         "vaul": "^1.1.2",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "zod": "^3.23.8"
+=======
+        "zod": "^4.1.12"
+>>>>>>> Stashed changes
 =======
         "zod": "^4.1.12"
 >>>>>>> Stashed changes
@@ -145,7 +169,11 @@
         "typescript": "^5"
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
 =======
 }
 >>>>>>> Stashed changes
