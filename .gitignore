@@ -42,9 +42,12 @@ next-env.d.ts
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 # large video files (stored in Supabase Storage)
 *.mp4
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
