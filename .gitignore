@@ -36,6 +36,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< Updated upstream
 
 # large video files (stored in Supabase Storage)
 *.mp4
+=======
+>>>>>>> Stashed changes

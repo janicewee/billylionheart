@@ -1,9 +1,17 @@
 {
   "projectId": "02ce17dc-4254-446e-825d-651a5175099d",
+<<<<<<< Updated upstream
   "createdAt": 1765330830711,
   "version": "1.0",
   "startupCommands": [
     "npm install; npm run dev"
   ],
   "vercelProjectId": "prj_kJsGea8whfvMMDUZ8p52cNzuKLUL"
+=======
+  "createdAt": 1766399856877,
+  "version": "1.0",
+  "startupCommands": [
+    "bun install; bun run dev"
+  ]
+>>>>>>> Stashed changes
 }
