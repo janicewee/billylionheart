@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -145,6 +146,8 @@ export default async function HomePage() {
         </div>
       </section>
 =======
+=======
+>>>>>>> Stashed changes
 import Image from "next/image";
 
 export default function Home() {
@@ -207,6 +210,9 @@ export default function Home() {
           </a>
         </div>
       </main>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     </div>
   );

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 @custom-variant dark (&:is(.dark *));
 
@@ -69,6 +70,8 @@
     @apply bg-background text-foreground;
     font-family: inherit;
 =======
+=======
+>>>>>>> Stashed changes
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -188,6 +191,9 @@
   }
   body {
     @apply bg-background text-foreground;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   }
 }
