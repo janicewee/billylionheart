@@ -8,16 +8,6 @@ import Image from "next/image";
 export default function SecretRecipesPage() {
     const recipes = [
       {
-        title: "Keto Brownies",
-        slug: "keto-brownies",
-        description: "Delicious gluten-free, keto-friendly brownies that are rich, fudgy, and perfect for any occasion.",
-        prepTime: "45-55 minutes",
-        servings: "16 squares",
-        difficulty: "Easy",
-        tags: ["Keto", "Gluten-Free", "Dessert"],
-        image: null
-      },
-      {
         title: "Strawberry Chocolate Chip Scones",
         slug: "strawberry-chocolate-chip-scones",
         description: "Delightful scones with ground almonds, strawberries, and chocolate chips. Perfect for breakfast or a snack.",
@@ -26,6 +16,16 @@ export default function SecretRecipesPage() {
         difficulty: "Easy",
         tags: ["Breakfast", "Scones", "Treat"],
         image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/Screenshot-2025-12-20-at-8.46.28-PM-1766234806076.png?width=8000&height=8000&resize=contain"
+      },
+      {
+        title: "Keto Brownies",
+        slug: "keto-brownies",
+        description: "Delicious gluten-free, keto-friendly brownies that are rich, fudgy, and perfect for any occasion.",
+        prepTime: "45-55 minutes",
+        servings: "16 squares",
+        difficulty: "Easy",
+        tags: ["Keto", "Gluten-Free", "Dessert"],
+        image: null
       }
     ];
 
