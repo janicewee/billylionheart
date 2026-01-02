@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,8 +11,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import Link from "next/link";
 
-// Use local videos from the public folder to avoid Supabase inactivity pauses
-const LOCAL_VIDEO_PATH = "";
+interface BookCover {
+  id: number;
+  bookNumber: number;
+  coverImageUrl: string;
+}
 
 export default function BookClubPage() {
   const [isOpening, setIsOpening] = useState<number | null>(null);
