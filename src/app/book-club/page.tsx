@@ -126,21 +126,21 @@ export default function BookClubPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="mx-auto max-w-sm aspect-[3/4] overflow-hidden rounded-xl border bg-muted shadow-sm relative">
-                  {bookCovers[1] ? (
-                    <Image
-                      src={bookCovers[1]}
-                      alt="Billy the Lion Boy Book Cover"
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                  ) : (
-                    <div className="h-full w-full flex items-center justify-center text-muted-foreground">
-                      Loading cover...
-                    </div>
-                  )}
-                </div>
+                <Link href="/books/4" className="block mx-auto max-w-sm aspect-[3/4] overflow-hidden rounded-xl border bg-muted shadow-sm relative hover:opacity-90 transition-opacity cursor-pointer">
+                    {bookCovers[1] ? (
+                      <Image
+                        src={bookCovers[1]}
+                        alt="Billy the Lion Boy Book Cover"
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="h-full w-full flex items-center justify-center text-muted-foreground">
+                        Loading cover...
+                      </div>
+                    )}
+                  </Link>
 
                 <div className="prose prose-sm max-w-none">
                   <h3 className="font-semibold text-lg mb-3">About the Book</h3>
@@ -220,21 +220,21 @@ export default function BookClubPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="mx-auto max-w-sm aspect-[3/4] overflow-hidden rounded-xl border bg-muted shadow-sm relative">
-                  {bookCovers[2] ? (
-                    <Image
-                      src={bookCovers[2]}
-                      alt="Billy & Bluma: Double Trouble Book Cover"
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                  ) : (
-                    <div className="h-full w-full flex items-center justify-center text-muted-foreground">
-                      Loading cover...
-                    </div>
-                  )}
-                </div>
+                <Link href="/books/5" className="block mx-auto max-w-sm aspect-[3/4] overflow-hidden rounded-xl border bg-muted shadow-sm relative hover:opacity-90 transition-opacity cursor-pointer">
+                    {bookCovers[2] ? (
+                      <Image
+                        src={bookCovers[2]}
+                        alt="Billy & Bluma: Double Trouble Book Cover"
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="h-full w-full flex items-center justify-center text-muted-foreground">
+                        Loading cover...
+                      </div>
+                    )}
+                  </Link>
 
 
                 <div className="prose prose-sm max-w-none">
@@ -315,21 +315,21 @@ export default function BookClubPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="mx-auto max-w-sm aspect-[3/4] overflow-hidden rounded-xl border bg-muted shadow-sm relative">
-                  {bookCovers[3] ? (
-                    <Image
-                      src={bookCovers[3]}
-                      alt="Secret Hero & His Flying Lion Book Cover"
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                  ) : (
-                    <div className="h-full w-full flex items-center justify-center text-muted-foreground">
-                      Loading cover...
-                    </div>
-                  )}
-                </div>
+                <Link href="/books/6" className="block mx-auto max-w-sm aspect-[3/4] overflow-hidden rounded-xl border bg-muted shadow-sm relative hover:opacity-90 transition-opacity cursor-pointer">
+                    {bookCovers[3] ? (
+                      <Image
+                        src={bookCovers[3]}
+                        alt="Secret Hero & His Flying Lion Book Cover"
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="h-full w-full flex items-center justify-center text-muted-foreground">
+                        Loading cover...
+                      </div>
+                    )}
+                  </Link>
 
 
                 <div className="prose prose-sm max-w-none">
