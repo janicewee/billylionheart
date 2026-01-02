@@ -220,19 +220,21 @@ export default function BookClubPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
-                  <div className="mx-auto max-w-sm aspect-[9/16] overflow-hidden rounded-xl border bg-muted shadow-sm">
-                    <video
-                      src="/billyandblumabookcover.mp4"
-                      className="h-full w-full object-cover"
-                      autoPlay
-                      playsInline
-                      loop
-                      muted
-                      aria-label="Billy & Bluma: Double Trouble Book Cover Video"
-                    >
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
+                <div className="mx-auto max-w-sm aspect-[3/4] overflow-hidden rounded-xl border bg-muted shadow-sm relative">
+                  {bookCovers[2] ? (
+                    <Image
+                      src={bookCovers[2]}
+                      alt="Billy & Bluma: Double Trouble Book Cover"
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center text-muted-foreground">
+                      Loading cover...
+                    </div>
+                  )}
+                </div>
 
 
                 <div className="prose prose-sm max-w-none">
