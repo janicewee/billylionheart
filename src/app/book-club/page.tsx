@@ -19,6 +19,26 @@ interface BookCover {
 
 export default function BookClubPage() {
   const [isOpening, setIsOpening] = useState<number | null>(null);
+  const [bookCovers, setBookCovers] = useState<Record<number, string>>({});
+
+  useEffect(() => {
+    async function fetchBookCovers() {
+      try {
+        const response = await fetch('/api/books');
+        if (response.ok) {
+          const books = await response.json();
+          const covers: Record<number, string> = {};
+          books.forEach((book: BookCover) => {
+            covers[book.bookNumber] = book.coverImageUrl;
+          });
+          setBookCovers(covers);
+        }
+      } catch (error) {
+        console.error('Failed to fetch book covers:', error);
+      }
+    }
+    fetchBookCovers();
+  }, []);
 
   const handleOpenPDF = async (bookId: number, bookTitle: string) => {
     setIsOpening(bookId);
