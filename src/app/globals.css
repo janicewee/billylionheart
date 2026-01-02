@@ -1,81 +1,4 @@
-/* Updated: 2025-12-22T23:37:20.056Z */
-/* Updated: 2025-12-22T23:36:57.111Z */
-/* Updated: 2025-12-22T14:34:53.421Z */
 @import "tailwindcss";
-<<<<<<< Updated upstream
-
-@custom-variant dark (&:is(.dark *));
-
-@theme {
-  --color-background: #FFFFFF;
-  --color-foreground: #000000;
-
-  --color-card: #FFFFFF;
-  --color-card-foreground: #000000;
-
-  --color-popover: #FFFFFF;
-  --color-popover-foreground: #000000;
-
-  --color-primary: #1F2937;
-  --color-primary-foreground: #FFFFFF;
-
-  --color-secondary: #F5F5F5;
-  --color-secondary-foreground: #000000;
-
-  --color-muted: #F5F5F5;
-  --color-muted-foreground: #666666;
-
-  --color-accent: #F3F4F6;
-  --color-accent-foreground: #000000;
-
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #fafafa;
-
-  --color-border: #E5E7EB;
-  --color-input: #E5E7EB;
-  --color-ring: #1F2937;
-
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-}
-
-@layer base {
-  :root {
-    --background: var(--color-background);
-    --foreground: var(--color-foreground);
-    --card: var(--color-card);
-    --card-foreground: var(--color-card-foreground);
-    --popover: var(--color-popover);
-    --popover-foreground: var(--color-popover-foreground);
-    --primary: var(--color-primary);
-    --primary-foreground: var(--color-primary-foreground);
-    --secondary: var(--color-secondary);
-    --secondary-foreground: var(--color-secondary-foreground);
-    --muted: var(--color-muted);
-    --muted-foreground: var(--color-muted-foreground);
-    --accent: var(--color-accent);
-    --accent-foreground: var(--color-accent-foreground);
-    --destructive: var(--color-destructive);
-    --destructive-foreground: var(--color-destructive-foreground);
-    --border: var(--color-border);
-    --input: var(--color-input);
-    --ring: var(--color-ring);
-    --radius: 0.75rem;
-  }
-
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    font-family: inherit;
-  }
-}
-
-@import "tw-animate-css";
-=======
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -197,4 +120,3 @@
     @apply bg-background text-foreground;
   }
 }
->>>>>>> Stashed changes
