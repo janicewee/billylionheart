@@ -31,7 +31,19 @@ export default async function HomePage() {
             <p className="text-muted-foreground leading-relaxed">
               🦁 Billy Lionheart was born during the chaotic era. Billy's parents and their entire community were slaughtered by Beast's men. Billy who was a toddler then, survived because he hid in a pipe. Rescue pilots who had arrived too late to evacuate the village found him and raised him in their community of misfits.
             </p>
-            
+
+            <div className="w-full aspect-video rounded-lg overflow-hidden">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/IEhjTVnOAXk"
+                title="Billy Lionheart"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+
             <p className="text-muted-foreground leading-relaxed">
               🐾 Mei befriended Barry and his very pregnant wife Mary, who were seeking shelter from persecution in the city. Billy was helping Mary's midwife, Mathilda when Bluma was born. Billy was the first thing baby Bluma saw.
             </p>
