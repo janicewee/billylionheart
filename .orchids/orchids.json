@@ -6,5 +6,6 @@
     "npm install; npm run dev"
   ],
   "vercelProjectId": "prj_kJsGea8whfvMMDUZ8p52cNzuKLUL",
-  "deployedWithUserToken": false
+  "deployedWithUserToken": false,
+  "templateId": "nextjs"
 }
