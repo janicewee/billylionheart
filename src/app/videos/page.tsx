@@ -3,19 +3,19 @@ import Navigation from '@/components/Navigation';
 const playlists = [
   {
     id: 'PLTXsSHtafNel8N_CVs_H6tOxA91Db0Cyz',
-    title: 'Billy Lionheart – Playlist 1',
+    title: 'Billy The Lion Boy',
   },
   {
     id: 'PLTXsSHtafNelWVCgSjr2JM0kB7dIHbul2',
-    title: 'Billy Lionheart – Playlist 2',
+    title: 'Billy & Bluma. Double Trouble',
   },
   {
     id: 'PLTXsSHtafNeloKl2CUbJ2AbvgBh4bxGKm',
-    title: 'Billy Lionheart – Playlist 3',
+    title: 'Secret Hero & His Flying Lion',
   },
   {
     id: 'PLTXsSHtafNekET9OznRGZUNbcul3iHZPd',
-    title: 'Billy Lionheart – Playlist 4',
+    title: 'The Characters in The Adventures of Billy Lionheart',
   },
 ];
 
