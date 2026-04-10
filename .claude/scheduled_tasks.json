@@ -1,0 +1,10 @@
+{
+  "tasks": [
+    {
+      "id": "b8a7de81",
+      "cron": "0 0 12 4 *",
+      "prompt": "Publish blog post ID 2 by running this in the terminal: node --env-file=/home/user/app/.env -e \"const { createClient } = require('@libsql/client'); const client = createClient({ url: process.env.TURSO_CONNECTION_URL, authToken: process.env.TURSO_AUTH_TOKEN }); client.execute({ sql: 'UPDATE blog_posts SET published = 1, updated_at = ? WHERE id = ?', args: [new Date().toISOString(), 2] }).then(() => console.log('Post 2 published')).catch(e => console.error(e.message));\"",
+      "createdAt": 1775790663376
+    }
+  ]
+}
