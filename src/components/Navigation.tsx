@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { authClient, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { BookOpen, Users, Library, Trophy, LogOut, User, Book, Menu, X, ChefHat, Newspaper } from "lucide-react";
+import { BookOpen, Users, Library, Trophy, LogOut, User, Book, Menu, X, ChefHat, Newspaper, PlayCircle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -41,6 +41,7 @@ export default function Navigation() {
     { href: "/book-club", label: "Book Club", icon: Library },
     { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
     { href: "/secret-recipes", label: "Secret Recipes", icon: ChefHat },
+    { href: "/videos", label: "Videos", icon: PlayCircle },
     { href: "/blog", label: "Blog", icon: Newspaper },
   ];
 
