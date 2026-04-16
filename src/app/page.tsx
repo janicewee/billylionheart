@@ -155,6 +155,21 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
+
+      {/* Video Section */}
+      <section className="container py-16 max-w-3xl mx-auto">
+        <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/jCdb3QZ-fyw"
+            title="Billy Lionheart"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </section>
     </div>
   );
 }
