@@ -3,7 +3,7 @@
   "createdAt": 1765330830711,
   "version": "1.0",
   "startupCommands": [
-    "npm install; npm run dev"
+    "npm install; npx next dev --turbopack"
   ],
   "vercelProjectId": "prj_kJsGea8whfvMMDUZ8p52cNzuKLUL",
   "deployedWithUserToken": false,
