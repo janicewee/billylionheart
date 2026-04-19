@@ -27,6 +27,7 @@ const bookSections = [
       { id: 'reZdAGNZs9I', label: 'Who poisoned Leonard Lion?' },
       { id: '_25vtHegnl4', label: 'Super powers. Out of control' },
       { id: '-al7PtfQ0pk', label: "Billy & Bluma in St Lydia's Academy" },
+      { id: 'BL3c1tQFQkw', label: 'Secret Hero & His Flying Lion' },
     ],
   },
 ];
