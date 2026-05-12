@@ -57,9 +57,9 @@ export default async function BookPage({ params }: { params: Promise<{ id: strin
       
       <div className="container py-12">
         {/* Book Header */}
-        <div className="grid md:grid-cols-[300px,1fr] gap-8 mb-12">
+        <div className="grid md:grid-cols-[200px,1fr] gap-8 mb-12">
           <div className="space-y-4">
-            <div className="relative aspect-[3/4] w-full rounded-lg overflow-hidden shadow-xl">
+            <div className="relative aspect-[3/4] w-full max-h-[280px] rounded-lg overflow-hidden shadow-xl">
               <Image
                 src={book.coverImageUrl}
                 alt={book.title}
