@@ -47,6 +47,17 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         {children}
+        <footer className="border-t bg-background/95 py-8 mt-16">
+          <div className="container flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-muted-foreground">
+            <a href="https://www.janicewee.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              Visit the author Janice Wee&apos;s website
+            </a>
+            <span className="hidden sm:inline">•</span>
+            <a href="https://emunahchronicles.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              Explore the Emunah Chronicles Universe
+            </a>
+          </div>
+        </footer>
         <Toaster />
         <VisualEditsMessenger />
       </body>
