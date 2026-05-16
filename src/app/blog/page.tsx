@@ -86,9 +86,10 @@ export default function BlogPage() {
                     </div>
                   )}
 
-                  <div className="prose prose-sm max-w-none text-muted-foreground whitespace-pre-wrap leading-relaxed">
-                    {post.content}
-                  </div>
+                  <div
+                    className="prose prose-sm max-w-none text-muted-foreground leading-relaxed [&_a]:text-primary [&_a]:underline [&_img]:rounded-lg [&_img]:shadow-md [&_img]:max-w-[200px]"
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                  />
                 </CardContent>
               </Card>
             );
